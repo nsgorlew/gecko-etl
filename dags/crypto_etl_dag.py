@@ -2,7 +2,12 @@ from datetime import timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
-from ..etl import run_crypto_etl
+import sys
+
+# import etl function
+sys.path.append("../")
+from etl import run_crypto_etl
+
 default_args = {
     'owner' : 'nicoadmin',
     'depends_on_past' : False,
