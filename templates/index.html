@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+    <head>
+        <style>
+            h1{
+                font-family: "32px "Lucida Grande", Helvetica, Arial, sans-serif";  
+                font-size: 1rem;
+                color: rgb(68, 67, 67);
+                text-align: center;
+            }
+            textarea {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            div {
+                text-align: center;
+            }
+            p {
+                text-align: center;
+            }
+        </style>
+    </head>
+
+<body>
+    <div>
+        <title>Cryptocurrency Exchange BTC Trading Volumes</title>
+    </div>
+    <div>
+        <canvas id="myChart" height="400" width="400"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var pieChart = new Chart(ctx, {
+                type : "doughnut",
+                data : {
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'BTC Trading Volumes per Crypto Exchange'
+                            }
+                        }
+                    },
+                    labels: {{exchanges | safe}},
+                    datasets: [
+                        {
+                            label: "BTC Trading Volumes",
+                            data: {{volumes | safe}},
+                            backgroundColor: [
+                                'rgb(255,99,132)',
+                                'rgb(54,162,235)',
+                                'rgb(255,205,86)',
+                                'rgb(74,162,86)',
+                                'rgb(23,33,99)',
+                                'rgb(203,57,70)',
+                                'rgb(10,255,33)'
+                            ]
+                        }
+                    ]
+                }
+            })
+        </script>
+        <script>
+            const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+            );
+        </script>
+    </div>
+</body>
+</html>
+{% endblock %}
