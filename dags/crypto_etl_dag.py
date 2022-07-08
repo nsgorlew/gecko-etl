@@ -24,7 +24,7 @@ def just_a_function():
 
 run_etl = PythonOperator(
     task_id = 'crypto__etl',
-    python_callable=just_a_function,
+    python_callable=run_crypto_etl,
     dag=dag
 )
 

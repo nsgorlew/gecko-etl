@@ -6,8 +6,6 @@ import json
 import sqlite3
 import os
 
-DATABASE_LOCATION = "sqlite:///crypto_exchanges_data.sqlite"
-
 def valid_data_check(df: pd.DataFrame) -> bool:
 	# Check for empty dataframe
 	if df.empty:
@@ -26,7 +24,9 @@ def valid_data_check(df: pd.DataFrame) -> bool:
 
 	return True
 
-if __name__ == '__main__':
+def run_crypto_etl():
+
+	database_location = "sqlite:///crypto_exchanges_data.sqlite"
 
 	# Extract
 	headers = {
@@ -84,7 +84,7 @@ if __name__ == '__main__':
 		print("Data is valid, proceeding to Load stage...")
 
 	# Load Stage
-	engine = sqlalchemy.create_engine(DATABASE_LOCATION)
+	engine = sqlalchemy.create_engine(database_location)
 	conn = sqlite3.connect('crypto_exchanges_data.sqlite')
 	cursor = conn.cursor()
 
@@ -113,4 +113,3 @@ if __name__ == '__main__':
 
 	conn.close()
 	print("Database closed")
-
